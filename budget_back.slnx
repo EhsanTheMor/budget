@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/budget_back.Api/budget_back.Api.csproj" />
+    <Project Path="src/budget_back.Application/budget_back.Application.csproj" />
+    <Project Path="src/budget_back.Domain/budget_back.Domain.csproj" />
+    <Project Path="src/budget_back.Infrastructure/budget_back.Infrastructure.csproj" />
+  </Folder>
+</Solution>
