@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using budget_back.Infrastructure;
 
@@ -10,42 +11,14 @@ using budget_back.Infrastructure;
 namespace budget_back.Infrastructure.Migrations
 {
     [DbContext(typeof(BudgetDbContext))]
-    partial class BudgetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260817073030_AddExpenseScopeAndRelatedEntities")]
+    partial class AddExpenseScopeAndRelatedEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.11");
-
-            modelBuilder.Entity("BuildingUser", b =>
-                {
-                    b.Property<int>("BuildingsId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("BuildingsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("BuildingUsers", (string)null);
-                });
-
-            modelBuilder.Entity("FamilyUser", b =>
-                {
-                    b.Property<int>("FamiliesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("FamiliesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("FamilyUsers", (string)null);
-                });
 
             modelBuilder.Entity("TravelUser", b =>
                 {
@@ -79,9 +52,6 @@ namespace budget_back.Infrastructure.Migrations
                     b.Property<int>("ExpenseScopeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ManagerId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -91,8 +61,6 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("ExpenseScopeId")
                         .IsUnique();
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("Buildings", (string)null);
                 });
@@ -204,9 +172,6 @@ namespace budget_back.Infrastructure.Migrations
                     b.Property<int>("ExpenseScopeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ManagerId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -216,8 +181,6 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("ExpenseScopeId")
                         .IsUnique();
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("Families", (string)null);
                 });
@@ -302,36 +265,6 @@ namespace budget_back.Infrastructure.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("BuildingUser", b =>
-                {
-                    b.HasOne("budget_back.Domain.AggregatedModels.Building", null)
-                        .WithMany()
-                        .HasForeignKey("BuildingsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("budget_back.Domain.AggregatedModels.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FamilyUser", b =>
-                {
-                    b.HasOne("budget_back.Domain.AggregatedModels.Family", null)
-                        .WithMany()
-                        .HasForeignKey("FamiliesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("budget_back.Domain.AggregatedModels.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TravelUser", b =>
                 {
                     b.HasOne("budget_back.Domain.AggregatedModels.Travel", null)
@@ -355,15 +288,7 @@ namespace budget_back.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("budget_back.Domain.AggregatedModels.User", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("ExpenseScope");
-
-                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.Category", b =>
@@ -396,15 +321,7 @@ namespace budget_back.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("budget_back.Domain.AggregatedModels.User", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("ExpenseScope");
-
-                    b.Navigation("Manager");
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.Travel", b =>

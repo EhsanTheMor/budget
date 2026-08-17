@@ -3,35 +3,36 @@ namespace budget_back.Domain.AggregatedModels;
 public class Category
 {
     public int Id { get; private set; }
-    public string Name { get; private set; }
-    public string Description { get; private set; }
-    public string Type { get; private set; }
-    public string Icon { get; private set; }
-    public string Color { get; private set; }
-    public CategoryCreationType CategoryCreationType { get; private set; }
-
-    public IReadOnlyList<Expence> Expences => _expences.AsReadOnly();
-    private List<Expence> _expences = new List<Expence>();
+    public string Name { get; private set; } = null!;
+    public string Description { get; private set; } = null!;
+    public string Type { get; private set; } = null!;
+    public string Icon { get; private set; } = null!;
+    public string Color { get; private set; } = null!;
+    public int ExpenseScopeId { get; private set; }
+    public ExpenseScope ExpenseScope { get; private set; } = null!;
 
     public Category(
         string name,
         string description,
         string type,
         string icon,
-        string color,
-        CategoryCreationType categoryCreationType = CategoryCreationType.User
-        )
+        string color)
+
     {
         Name = name;
         Description = description;
         Type = type;
         Icon = icon;
         Color = color;
-        CategoryCreationType = categoryCreationType;
+        ExpenseScope = new ExpenseScope(ExpenseScopeType.Category);
     }
 
-    public void AddExpence(Expence expence)
+    public Expence AddExpence(string description, decimal amount, int? bankAccountId)
     {
-        _expences.Add(expence);
+        var expence = new Expence(description, amount, ExpenseScope, bankAccountId);
+        ExpenseScope.AddExpence(expence);
+        return expence;
     }
 }
+
+
