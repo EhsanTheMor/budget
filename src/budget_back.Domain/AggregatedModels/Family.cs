@@ -13,18 +13,17 @@ public class Family
 
     private readonly List<User> _users = [];
 
-    public Family(string name, User manager, string? description = null)
+    public Family(string name, int managerId, string? description = null)
     {
         Name = name;
         Description = description;
-        Manager = manager;
+        ManagerId = managerId;
         ExpenseScope = new ExpenseScope(ExpenseScopeType.Family);
-        _users.Add(manager);
     }
 
     public Expence AddExpence(string description, decimal amount, int? bankAccountId)
     {
-        var expence = new Expence(description, amount, ExpenseScope, bankAccountId);
+        var expence = new Expence(description, amount, ExpenseScopeId, bankAccountId);
         ExpenseScope.AddExpence(expence);
         return expence;
     }
@@ -40,6 +39,6 @@ public class Family
     public void SetManager(User user)
     {
         AddUser(user);
-        Manager = user;
+        ManagerId = user.Id;
     }
 }

@@ -8,7 +8,7 @@ public class ExpenceEntityTypeConfiguration : IEntityTypeConfiguration<Expence>
 {
     public void Configure(EntityTypeBuilder<Expence> builder)
     {
-        builder.ToTable("Expences");
+        builder.ToTable("Expence");
 
         builder.HasKey(expence => expence.Id);
 

@@ -8,7 +8,7 @@ public class TravelEntityTypeConfiguration : IEntityTypeConfiguration<Travel>
 {
     public void Configure(EntityTypeBuilder<Travel> builder)
     {
-        builder.ToTable("Travels");
+        builder.ToTable("Travel");
 
         builder.HasKey(travel => travel.Id);
 
@@ -28,9 +28,15 @@ public class TravelEntityTypeConfiguration : IEntityTypeConfiguration<Travel>
         builder.HasIndex(travel => travel.ExpenseScopeId)
             .IsUnique();
 
+        builder.HasOne(travel => travel.Manager)
+            .WithMany()
+            .HasForeignKey(travel => travel.ManagerId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
+
         builder.HasMany(travel => travel.Users)
             .WithMany(user => user.Travels)
-            .UsingEntity(j => j.ToTable("TravelUsers"));
+            .UsingEntity(j => j.ToTable("TravelUser"));
 
         builder.Navigation(travel => travel.Users)
             .UsePropertyAccessMode(PropertyAccessMode.Field);

@@ -1,0 +1,1 @@
+dotnet build src/budget_back.Api/budget_back.Api.csproj

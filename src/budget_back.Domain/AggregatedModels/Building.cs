@@ -13,19 +13,18 @@ public class Building
     public IReadOnlyList<User> Users => _users.AsReadOnly();
     private readonly List<User> _users = [];
 
-    public Building(string name, User manager, string? description = null, string? address = null)
+    public Building(string name, int managerId, string? description = null, string? address = null)
     {
         Name = name;
         Description = description;
         Address = address;
-        Manager = manager;
+        ManagerId = managerId;
         ExpenseScope = new ExpenseScope(ExpenseScopeType.Building);
-        _users.Add(manager);
     }
 
     public Expence AddExpence(string description, decimal amount, int? bankAccountId)
     {
-        var expence = new Expence(description, amount, ExpenseScope, bankAccountId);
+        var expence = new Expence(description, amount, ExpenseScopeId, bankAccountId);
         ExpenseScope.AddExpence(expence);
         return expence;
     }

@@ -8,7 +8,7 @@ public class CategoryEntityTypeConfiguration : IEntityTypeConfiguration<Category
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
-        builder.ToTable("Categories");
+        builder.ToTable("Category");
 
         builder.HasKey(category => category.Id);
 

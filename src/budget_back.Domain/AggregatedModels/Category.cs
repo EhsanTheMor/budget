@@ -29,7 +29,7 @@ public class Category
 
     public Expence AddExpence(string description, decimal amount, int? bankAccountId)
     {
-        var expence = new Expence(description, amount, ExpenseScope, bankAccountId);
+        var expence = new Expence(description, amount, ExpenseScopeId, bankAccountId);
         ExpenseScope.AddExpence(expence);
         return expence;
     }

@@ -8,7 +8,7 @@ public class FamilyEntityTypeConfiguration : IEntityTypeConfiguration<Family>
 {
     public void Configure(EntityTypeBuilder<Family> builder)
     {
-        builder.ToTable("Families");
+        builder.ToTable("Family");
 
         builder.HasKey(family => family.Id);
 
@@ -36,7 +36,7 @@ public class FamilyEntityTypeConfiguration : IEntityTypeConfiguration<Family>
 
         builder.HasMany(family => family.Users)
             .WithMany(user => user.Families)
-            .UsingEntity(j => j.ToTable("FamilyUsers"));
+            .UsingEntity(j => j.ToTable("FamilyUser"));
 
         builder.Navigation(family => family.Users)
             .UsePropertyAccessMode(PropertyAccessMode.Field);

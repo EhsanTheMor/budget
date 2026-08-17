@@ -8,7 +8,7 @@ public class BuildingEntityTypeConfiguration : IEntityTypeConfiguration<Building
 {
     public void Configure(EntityTypeBuilder<Building> builder)
     {
-        builder.ToTable("Buildings");
+        builder.ToTable("Building");
 
         builder.HasKey(building => building.Id);
 
@@ -39,7 +39,7 @@ public class BuildingEntityTypeConfiguration : IEntityTypeConfiguration<Building
 
         builder.HasMany(building => building.Users)
             .WithMany(user => user.Buildings)
-            .UsingEntity(j => j.ToTable("BuildingUsers"));
+            .UsingEntity(j => j.ToTable("BuildingUser"));
 
         builder.Navigation(building => building.Users)
             .UsePropertyAccessMode(PropertyAccessMode.Field);

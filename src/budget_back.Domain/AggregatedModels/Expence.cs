@@ -15,12 +15,12 @@ public class Expence
     public Expence(
         string description,
         decimal amount,
-        ExpenseScope expenseScope,
+        int expenseScopeId,
         int? bankAccountId)
     {
         Description = description;
         Amount = amount;
-        ExpenseScope = expenseScope;
+        ExpenseScopeId = expenseScopeId;
         CreatedAt = DateTime.UtcNow;
         BankAccountId = bankAccountId;
     }

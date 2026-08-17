@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using budget_back.Infrastructure;
 
@@ -10,9 +11,11 @@ using budget_back.Infrastructure;
 namespace budget_back.Infrastructure.Migrations
 {
     [DbContext(typeof(BudgetDbContext))]
-    partial class BudgetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260817085622_AddedFamilyBuildingAccountFeature")]
+    partial class AddedFamilyBuildingAccountFeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.11");
@@ -29,7 +32,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("BuildingUser", (string)null);
+                    b.ToTable("BuildingUsers", (string)null);
                 });
 
             modelBuilder.Entity("FamilyUser", b =>
@@ -44,7 +47,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("FamilyUser", (string)null);
+                    b.ToTable("FamilyUsers", (string)null);
                 });
 
             modelBuilder.Entity("TravelUser", b =>
@@ -59,7 +62,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("TravelUser", (string)null);
+                    b.ToTable("TravelUsers", (string)null);
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.BankAccount", b =>
@@ -88,7 +91,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BankAccount", (string)null);
+                    b.ToTable("BankAccounts", (string)null);
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.Building", b =>
@@ -123,7 +126,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("Building", (string)null);
+                    b.ToTable("Buildings", (string)null);
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.Category", b =>
@@ -165,7 +168,7 @@ namespace budget_back.Infrastructure.Migrations
                     b.HasIndex("ExpenseScopeId")
                         .IsUnique();
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.Expence", b =>
@@ -201,7 +204,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("ExpenseScopeId");
 
-                    b.ToTable("Expence", (string)null);
+                    b.ToTable("Expences", (string)null);
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.ExpenseScope", b =>
@@ -217,7 +220,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ExpenseScope", (string)null);
+                    b.ToTable("ExpenseScopes", (string)null);
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.Family", b =>
@@ -248,7 +251,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("Family", (string)null);
+                    b.ToTable("Families", (string)null);
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.Travel", b =>
@@ -285,7 +288,7 @@ namespace budget_back.Infrastructure.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("Travel", (string)null);
+                    b.ToTable("Travels", (string)null);
                 });
 
             modelBuilder.Entity("budget_back.Domain.AggregatedModels.User", b =>
@@ -333,7 +336,7 @@ namespace budget_back.Infrastructure.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BuildingUser", b =>

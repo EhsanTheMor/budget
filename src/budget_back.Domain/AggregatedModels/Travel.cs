@@ -9,11 +9,14 @@ public class Travel
     public DateTime? EndDate { get; private set; }
     public int ExpenseScopeId { get; private set; }
     public ExpenseScope ExpenseScope { get; private set; } = null!;
+    public int ManagerId { get; private set; }
+    public User Manager { get; private set; } = null!;
     public IReadOnlyList<User> Users => _users.AsReadOnly();
     private readonly List<User> _users = [];
 
-    public Travel(string name, string? description = null, DateTime? startDate = null, DateTime? endDate = null)
+    public Travel(int managerId, string name, string? description = null, DateTime? startDate = null, DateTime? endDate = null)
     {
+        ManagerId = managerId;
         Name = name;
         Description = description;
         StartDate = startDate;
@@ -23,7 +26,7 @@ public class Travel
 
     public Expence AddExpence(string description, decimal amount, int? bankAccountId)
     {
-        var expence = new Expence(description, amount, ExpenseScope, bankAccountId);
+        var expence = new Expence(description, amount, ExpenseScopeId, bankAccountId);
         ExpenseScope.AddExpence(expence);
         return expence;
     }
@@ -34,5 +37,11 @@ public class Travel
         {
             _users.Add(user);
         }
+    }
+
+    public void SetManager(User user)
+    {
+        AddUser(user);
+        Manager = user;
     }
 }

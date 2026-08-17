@@ -8,7 +8,7 @@ public class ExpenseScopeEntityTypeConfiguration : IEntityTypeConfiguration<Expe
 {
     public void Configure(EntityTypeBuilder<ExpenseScope> builder)
     {
-        builder.ToTable("ExpenseScopes");
+        builder.ToTable("ExpenseScope");
 
         builder.HasKey(scope => scope.Id);
 
