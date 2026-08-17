@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using budget_back.Application.Abstractions.Persist;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +19,8 @@ public static class DependencyInjection
         {
             options.UseSqlite(connectionString);
         });
+
+        services.AddScoped<IBudgetDbContext>(provider => provider.GetRequiredService<BudgetDbContext>());
 
         return services;
     }

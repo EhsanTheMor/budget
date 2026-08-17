@@ -1,9 +1,10 @@
+using budget_back.Application.Abstractions.Persist;
 using budget_back.Domain.AggregatedModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace budget_back.Infrastructure;
 
-public class BudgetDbContext : DbContext
+public class BudgetDbContext : DbContext, IBudgetDbContext
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<Category> Categories => Set<Category>();

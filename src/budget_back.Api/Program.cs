@@ -1,9 +1,10 @@
-using budget_back.Domain.AggregatedModels;
+using budget_back.Application;
 using budget_back.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
