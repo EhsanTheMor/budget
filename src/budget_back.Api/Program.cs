@@ -1,8 +1,10 @@
 using budget_back.Domain.AggregatedModels;
+using budget_back.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
@@ -28,16 +30,6 @@ app.MapGet("/weatherforecast", () =>
         summaries[Random.Shared.Next(summaries.Length)]
     ))
             .ToArray();
-
-    var category = new Category
-    {
-        Id = 1,
-        Name = "Food",
-        Description = "Food",
-        Type = "Expense",
-        Icon = "🍔",
-        Color = "red"
-    };
 
     return forecast;
 })

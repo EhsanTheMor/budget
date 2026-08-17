@@ -1,0 +1,1 @@
+dotnet ef database update -p src/budget_back.Infrastructure/ -s src/budget_back.Api/
