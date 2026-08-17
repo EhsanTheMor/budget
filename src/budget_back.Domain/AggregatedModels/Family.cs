@@ -28,6 +28,13 @@ public class Family
         return expence;
     }
 
+    public void Update(string name, int managerId, string? description)
+    {
+        Name = name;
+        ManagerId = managerId;
+        Description = description;
+    }
+
     public void AddUser(User user)
     {
         if (!_users.Contains(user))
@@ -36,9 +43,18 @@ public class Family
         }
     }
 
+    public void AddUsers(IEnumerable<User> users)
+    {
+        foreach (var user in users)
+        {
+            AddUser(user);
+        }
+    }
+
     public void SetManager(User user)
     {
         AddUser(user);
+        Manager = user;
         ManagerId = user.Id;
     }
 }

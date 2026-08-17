@@ -31,6 +31,15 @@ public class Travel
         return expence;
     }
 
+    public void Update(int managerId, string name, string? description, DateTime? startDate, DateTime? endDate)
+    {
+        ManagerId = managerId;
+        Name = name;
+        Description = description;
+        StartDate = startDate;
+        EndDate = endDate;
+    }
+
     public void AddUser(User user)
     {
         if (!_users.Contains(user))
@@ -39,9 +48,18 @@ public class Travel
         }
     }
 
+    public void AddUsers(IEnumerable<User> users)
+    {
+        foreach (var user in users)
+        {
+            AddUser(user);
+        }
+    }
+
     public void SetManager(User user)
     {
         AddUser(user);
         Manager = user;
+        ManagerId = user.Id;
     }
 }

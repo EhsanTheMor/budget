@@ -29,6 +29,14 @@ public class Building
         return expence;
     }
 
+    public void Update(string name, int managerId, string? description, string? address)
+    {
+        Name = name;
+        ManagerId = managerId;
+        Description = description;
+        Address = address;
+    }
+
     public void AddUser(User user)
     {
         if (!_users.Contains(user))
@@ -37,9 +45,18 @@ public class Building
         }
     }
 
+    public void AddUsers(IEnumerable<User> users)
+    {
+        foreach (var user in users)
+        {
+            AddUser(user);
+        }
+    }
+
     public void SetManager(User user)
     {
         AddUser(user);
         Manager = user;
+        ManagerId = user.Id;
     }
 }

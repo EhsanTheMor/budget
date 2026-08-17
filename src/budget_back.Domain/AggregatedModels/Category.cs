@@ -27,6 +27,15 @@ public class Category
         ExpenseScope = new ExpenseScope(ExpenseScopeType.Category);
     }
 
+    public void Update(string name, string description, string type, string icon, string color)
+    {
+        Name = name;
+        Description = description;
+        Type = type;
+        Icon = icon;
+        Color = color;
+    }
+
     public Expence AddExpence(string description, decimal amount, int? bankAccountId)
     {
         var expence = new Expence(description, amount, ExpenseScopeId, bankAccountId);
